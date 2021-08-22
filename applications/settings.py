@@ -11,7 +11,8 @@ class Settings:
     """
     def __init__(self):
         logging.info("Initialisation of settings")
-        self.db_path = os.path.join(os.path.abspath(os.getcwd()), "application\\database\\WorkTimer.db")
+        self.db_path = "WorkTimer.db"
+        print(self.db_path)
 
 
 settings = Settings()
