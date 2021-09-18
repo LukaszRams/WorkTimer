@@ -27,7 +27,7 @@ class Welcome(QMainWindow):
             settings.first_run = True
             self.ui.login_btn.setVisible(False)
         self.ui.login_btn.clicked.connect(self.slot_login)
-        self.ui.signin_btn.clicked.connect(self.slot_sign_in)
+        self.ui.signin_btn.clicked.connect(self.slot_Sign_up)
 
     def slot_login(self):
         """
@@ -45,12 +45,12 @@ class Welcome(QMainWindow):
             # self.menu = Menu()
             # self.menu.show()
 
-    def slot_sign_in(self):
+    def slot_Sign_up(self):
         """
         Opens the registration window by closing the welcome window
         :return:
         """
-        logging.info("Sign in selected")
+        logging.info("Sign up selected")
         from applications.register import Register
         self.register = Register(parent=self)
         self.hide()
