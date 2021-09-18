@@ -29,8 +29,8 @@ class Database:
         Creates a table in the database (if the table with the specified name does not exist).
         Primary key must be add to kwargs
             example:
-                create_table(table_name="accounts", id=("integer", "PRIMARY KEY"), firstname=("text", "NOT NULL"),
-                            lastname=("text", "NOT NULL"), password=("text", "NOT NULL"), priority=("integer", "NOT NULL"),
+                create_table(table_name="accounts", id=("integer", "PRIMARY KEY"), first_name=("text", "NOT NULL"),
+                            surname=("text", "NOT NULL"), password=("text", "NOT NULL"), priority=("integer", "NOT NULL"),
                             position=("text",), comments=("text",))
         :param table_name: name of the table to be created
         :param kwargs: column names and Tuple(type, other flags)
@@ -38,7 +38,7 @@ class Database:
         """
         sql_string = f"""CREATE TABLE IF NOT EXISTS {table_name} 
                     ({", ".join([f'{key} {" ".join([elem for elem in val])}' for key, val in kwargs.items()])})"""
-        logging.debug("sql string: \n%s" % sql_string)
+        logging.debug("Creating %s table" % table_name)
         try:
             self.cursor.execute(sql_string)
             self.connection.commit()
@@ -59,7 +59,7 @@ class Database:
         try:
             self.cursor.execute(f"""INSERT INTO {table_name} VALUES ({", ".join(["?" for _ in args])})""", args)
             self.connection.commit()
-            logging.info("Record added ")
+            logging.info("Record added to table \'%s\'" % table_name)
             return True
         except:
             import traceback

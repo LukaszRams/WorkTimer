@@ -8,8 +8,8 @@ import os
 
 
 def test_create_db():
-    database.create_table(table_name="test", firstname=("text", "PRIMARY KEY"),
-                          lastname=("text", "NOT NULL"), password=("text",),
+    database.create_table(table_name="test", first_name=("text", "PRIMARY KEY"),
+                          surname=("text", "NOT NULL"), password=("text",),
                           priority=("integer", "NOT NULL"))
     # checking whether a database has been created
     path = os.path.join(os.getcwd(), "WorkTimer.db")
@@ -23,8 +23,8 @@ def test_create_db():
 
 
 def test_add_record_and_get_record():
-    database.create_table(table_name="test", firstname=("text", "PRIMARY KEY"),
-                          lastname=("text", "NOT NULL"), password=("text",),
+    database.create_table(table_name="test", first_name=("text", "PRIMARY KEY"),
+                          surname=("text", "NOT NULL"), password=("text",),
                           priority=("integer", "NOT NULL"))
     count_query = """SELECT count(*) FROM test"""
     assert 0 == database.get_record(count_query)[0][0]
