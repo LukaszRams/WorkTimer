@@ -26,16 +26,61 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="Back">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>100</width>
-           <height>20</height>
+           <height>30</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	 border: 1px solid gray;
+    border-radius: 10px;
+    background-color: qlineargradient(x1: 0.5, y1: 0.5, x2: 1, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton:default {
+	border: 2px solid gray;
+	border-radius: 10px;
+    background-color: qlineargradient(x1: 0.5, y1: 0.5, x2: 1, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton:hover {
+	border: 1px solid gray;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);
+}
+QPushButton:pressed {
+	border: 1px solid gray;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+}</string>
          </property>
          <property name="text">
           <string>Back</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QLabel" name="label">
@@ -53,6 +98,7 @@
          </property>
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>16</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -67,12 +113,51 @@
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="Register">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>150</width>
            <height>30</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	 border: 1px solid gray;
+    border-radius: 10px;
+    background-color: qlineargradient(x1: 0.5, y1: 0.5, x2: 1, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton:default {
+	border: 2px solid gray;
+	border-radius: 10px;
+    background-color: qlineargradient(x1: 0.5, y1: 0.5, x2: 1, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+}
+QPushButton:hover {
+	border: 1px solid gray;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #f6f7fa, stop: 1 #dadbde);
+}
+QPushButton:pressed {
+	border: 1px solid gray;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+}</string>
          </property>
          <property name="text">
           <string>Register</string>
@@ -85,6 +170,7 @@
       <widget class="QLabel" name="label_2">
        <property name="font">
         <font>
+         <family>Segoe Print</family>
          <pointsize>12</pointsize>
         </font>
        </property>
@@ -99,7 +185,7 @@
         <number>50</number>
        </property>
        <property name="topMargin">
-        <number>70</number>
+        <number>50</number>
        </property>
        <property name="rightMargin">
         <number>100</number>
@@ -108,23 +194,62 @@
         <widget class="QLabel" name="first_name">
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>FIRST NAME           </string>
+          <string>FIRST NAME</string>
          </property>
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QLineEdit" name="I_first_name">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
-           <height>16777215</height>
+           <height>26</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+	border: 1px solid gray;
+    border-radius: 13px;
+    padding: 0 10px;
+    font-size: 10px;
+    selection-background-color: darkgray;
+	font: 10pt &quot;Segoe Print&quot;;
+}
+QLineEdit:hover{
+	border: 2px solid blue;
+}
+QLineEdit:focus{
+	border: 1px solid blue;
+}</string>
+         </property>
+         <property name="placeholderText">
+          <string>Enter your firstname</string>
          </property>
         </widget>
        </item>
@@ -142,23 +267,62 @@
         <widget class="QLabel" name="surname">
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>surname             </string>
+          <string>SURNAME</string>
          </property>
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QLineEdit" name="I_surname">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
-           <height>16777215</height>
+           <height>26</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+	border: 1px solid gray;
+    border-radius: 13px;
+    padding: 0 10px;
+    font-size: 10px;
+    selection-background-color: darkgray;
+	font: 10pt &quot;Segoe Print&quot;;
+}
+QLineEdit:hover{
+	border: 2px solid blue;
+}
+QLineEdit:focus{
+	border: 1px solid blue;
+}</string>
+         </property>
+         <property name="placeholderText">
+          <string>Enter your surname</string>
          </property>
         </widget>
        </item>
@@ -176,23 +340,69 @@
         <widget class="QLabel" name="username">
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>USERNAME            </string>
+          <string>USERNAME</string>
          </property>
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QLineEdit" name="l_username">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
-           <height>16777215</height>
+           <height>26</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>The user name must start with a letter 
+and may only consist of letters,
+numbers and an underscore character.
+Letters are case-sensitive
+The minimum length is four characters</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+	border: 1px solid gray;
+    border-radius: 13px;
+    padding: 0 10px;
+    font-size: 10px;
+    selection-background-color: darkgray;
+	font: 10pt &quot;Segoe Print&quot;;
+}
+QLineEdit:hover{
+	border: 2px solid blue;
+}
+QLineEdit:focus{
+	border: 1px solid blue;
+}</string>
+         </property>
+         <property name="placeholderText">
+          <string>Enter your username</string>
          </property>
         </widget>
        </item>
@@ -213,26 +423,70 @@
         <widget class="QLabel" name="pwd">
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>PASSWORD            </string>
+          <string>PASSWORD</string>
          </property>
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QLineEdit" name="l_password">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
-           <height>16777215</height>
+           <height>26</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>The password must contain at least one lowercase letter,
+a capital letter, a number, a special character (!@#$%^&amp;*?)
+and must have at least 8 characters</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+	border: 1px solid gray;
+    border-radius: 13px;
+    padding: 0 10px;
+    font-size: 10px;
+    selection-background-color: darkgray;
+	font: 10pt &quot;Segoe Print&quot;;
+}
+QLineEdit:hover{
+	border: 2px solid blue;
+}
+QLineEdit:focus{
+	border: 1px solid blue;
+}</string>
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Enter your password</string>
          </property>
         </widget>
        </item>
@@ -250,9 +504,10 @@
         <widget class="QLabel" name="re_pwd">
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -261,15 +516,58 @@
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QLineEdit" name="l_re_password">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
-           <height>16777215</height>
+           <height>26</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>The password must contain at least one lowercase letter,
+a capital letter, a number, a special character (!@#$%^&amp;*?)
+and must have at least 8 characters</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+	border: 1px solid gray;
+    border-radius: 13px;
+    padding: 0 10px;
+    font-size: 10px;
+    selection-background-color: darkgray;
+	font: 10pt &quot;Segoe Print&quot;;
+}
+QLineEdit:hover{
+	border: 2px solid blue;
+}
+QLineEdit:focus{
+	border: 1px solid blue;
+}</string>
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Retype your password</string>
          </property>
         </widget>
        </item>
@@ -287,23 +585,71 @@
         <widget class="QLabel" name="priority">
          <property name="font">
           <font>
+           <family>Segoe Print</family>
            <pointsize>14</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>PRIORITY            </string>
+          <string>PRIORITY</string>
          </property>
         </widget>
        </item>
        <item>
+        <spacer name="horizontalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QComboBox" name="l_priority">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>150</width>
-           <height>16777215</height>
+           <height>26</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+    border: 1px solid gray;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+	padding: 0 20px;
+	
+	font: 10pt &quot;Segoe Print&quot;;
+}
+
+QComboBox:hover{
+	border: 2px solid blue;
+}
+QComboBox:focus{
+	border: 1px solid blue;
+}
+
+QComboBox:on {
+    padding-top: 3px;
+    padding-left: 4px;
+}
+</string>
+         </property>
+         <property name="currentText">
+          <string>user</string>
          </property>
          <item>
           <property name="text">

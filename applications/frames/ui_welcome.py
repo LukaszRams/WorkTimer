@@ -9,15 +9,32 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os
+
+
+btn_style = """QPushButton {
+                    border: 1px solid gray;
+                    font: bold 15pt \"Segoe Print\";
+                    border-radius: 15px;
+                    background-color: qlineargradient(x1: 0.5, y1: 0.5, x2: 1, y2: 1,
+                                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+                }
+                QPushButton:hover {
+                    border: 1px solid gray;
+                    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                                      stop: 0 #f6f7fa, stop: 1 #dadbde);
+                }
+                QPushButton:pressed {
+                    border: 1px solid gray;
+                    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                                      stop: 0 #dadbde, stop: 1 #f6f7fa);
+                }"""
 
 
 class Ui_WelcomeFrame:
     def setupUi(self, WelcomeFrame):
         WelcomeFrame.setObjectName("WelcomeFrame")
         WelcomeFrame.setWindowTitle("WelcomeFrame")
-        # WelcomeFrame.setWindowIcon(QtGui.QIcon(os.path.join(os.getcwd(), "applications", "res", "icons", "WT.png")))    # TODO: Create resource file
-        WelcomeFrame.resize(653, 478)
+        WelcomeFrame.setFixedSize(653, 478)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -63,9 +80,15 @@ class Ui_WelcomeFrame:
         sizePolicy.setHeightForWidth(self.login_btn.sizePolicy().hasHeightForWidth())
         self.login_btn.setSizePolicy(sizePolicy)
         self.login_btn.setObjectName("login_btn")
+        self.login_btn.setMinimumSize(300, 30)
+        self.login_btn.setMaximumSize(600, 60)
+        self.login_btn.setStyleSheet(btn_style)
         self.btn_layout.addWidget(self.login_btn)
         self.signup_btn = QtWidgets.QPushButton(self.canvas)
         self.signup_btn.setEnabled(True)
+        self.signup_btn.setMinimumSize(300, 30)
+        self.signup_btn.setMaximumSize(600, 60)
+        self.signup_btn.setStyleSheet(btn_style)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

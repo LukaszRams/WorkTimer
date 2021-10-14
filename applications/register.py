@@ -60,11 +60,11 @@ class Register(QWidget):
         status, status_string, data = self.try_register()
         if not status:
             self.ui.show_info.setText(status_string)
-            self.ui.show_info.setStyleSheet("color: red; font: bold")
+            self.ui.show_info.setStyleSheet("color: red;")
             logging.info("Error during user registration: %s" % status_string)
         else:
             self.ui.show_info.setText(status_string)
-            self.ui.show_info.setStyleSheet("color: green; font: bold 16px")
+            self.ui.show_info.setStyleSheet("color: green; font: bold 16pt")
             if settings.first_run:
                 database.create_table(table_name=settings.users_table,
                                       username=("text", "PRIMARY_KEY"),
@@ -84,11 +84,11 @@ class Register(QWidget):
         :return:
         """
         status_string = ""
-        username, status = self.check_username(self.ui.l_username.text())
-        status_string += status
         first_name, status = self.check_first_name(self.ui.l_first_name.text())
         status_string += status
         surname, status = self.check_surname(self.ui.l_surname.text())
+        status_string += status
+        username, status = self.check_username(self.ui.l_username.text())
         status_string += status
         password, status = self.check_password(self.ui.l_password.text(), self.ui.l_re_password.text())
         status_string += status
@@ -141,7 +141,7 @@ class Register(QWidget):
         """
         parts = surname.split("-")
         if parts[0] == "":
-            return None, f"Last name is required\n"
+            return None, f"Surname is required\n"
         result = self._check_parts(parts)
         if result:
             return None, f"Surname is incorrect, {result}"

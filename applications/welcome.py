@@ -27,11 +27,12 @@ class Welcome(QMainWindow):
             settings.first_run = True
             self.ui.login_btn.setVisible(False)
         self.ui.login_btn.clicked.connect(self.slot_login)
-        self.ui.signin_btn.clicked.connect(self.slot_Sign_up)
+        self.ui.signup_btn.clicked.connect(self.slot_sign_up)
 
     def slot_login(self):
         """
-        Opens the login window closing the welcome window
+        Opens the login window and closing the welcome window.
+        If you manage to log in, it displays the menu window
         :return:
         """
         logging.info("Login selected")
@@ -39,13 +40,14 @@ class Welcome(QMainWindow):
         settings.first_run = False
         self.login = Login(parent=self)
         self.hide()
-        if self.login.exec_() == QDialog.Accepted:
-            # TODO: Menu window
-            print("accepted")
-            # self.menu = Menu()
-            # self.menu.show()
+        if self.login.exec_() == QDialog.Accepted:  # If log in
+            from applications.menu import Menu
+            self.menu = Menu()
+            self.menu.show()
+            self.login.hide()
+            logging.debug("The menu window is displayed")
 
-    def slot_Sign_up(self):
+    def slot_sign_up(self):
         """
         Opens the registration window by closing the welcome window
         :return:
@@ -69,4 +71,6 @@ class Welcome(QMainWindow):
             return True
         # check if table has records
         return len(database.get_record(f"SELECT * FROM {settings.users_table}")) == 0
+
+welcome = Welcome()
 
