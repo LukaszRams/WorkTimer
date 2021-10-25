@@ -3,6 +3,7 @@
 from applications.frames.ui_login import Ui_Login
 from applications.frames.ui_login_error import Ui_LoginError
 from PyQt5.QtWidgets import QDialog, QLineEdit
+from PyQt5.QtGui import QCloseEvent
 from applications.database.connect import database
 from applications.settings import settings
 import logging
@@ -18,6 +19,17 @@ class Login(QDialog):
         self.ui.Back_btn.clicked.connect(self.slot_back)
         self.ui.check_password.pressed.connect(self.slot_show_password)
         self.ui.check_password.released.connect(self.slot_hide_password)
+
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        """
+        Close dialog and show parent window
+        :param a0:
+        :return:
+        """
+        logging.debug("Close event")
+        self.parent.show()
+        self.hide()
+
 
     def slot_show_password(self):
         """
@@ -50,8 +62,8 @@ class Login(QDialog):
         """
         data = self.check_user()
         if data:
-            if self.ui.l_password.text() == data[3]:
-                settings.update_user_setting(["username", "first_name", "surname", "priority"], [*data[:3], data[4]])
+            if self.ui.l_password.text() == data[4]:
+                settings.update_user_setting(["username", "first_name", "surname", "priority"], [*data[1:4], data[5]])
                 settings.load_plugins(settings.user["priority"])
                 self.accept()
                 logging.info("The user has been logged in")

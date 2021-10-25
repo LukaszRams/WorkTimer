@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from applications.frames.ui_register import Ui_Register
 from PyQt5.QtWidgets import QWidget
+from PyQt5 import QtCore, QtGui
 from applications.database.connect import database
 from applications.settings import settings
 import re
@@ -23,6 +24,15 @@ class Register(QWidget):
         self.ui.Register.setDisabled(True)
         self.ui.Back.clicked.connect(self.slot_back)
         self.ui.Register.clicked.connect(self.slot_register_user)
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        """
+        Closing the app
+        :param a0:
+        :return:
+        """
+        import sys
+        sys.exit()
 
     def detect_changes(self):
         """
@@ -61,18 +71,22 @@ class Register(QWidget):
         if not status:
             self.ui.show_info.setText(status_string)
             self.ui.show_info.setStyleSheet("color: red;")
+            self.ui.show_info.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             logging.info("Error during user registration: %s" % status_string)
         else:
             self.ui.show_info.setText(status_string)
             self.ui.show_info.setStyleSheet("color: green; font: bold 16pt")
+            self.ui.show_info.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             if settings.first_run:
                 database.create_table(table_name=settings.users_table,
-                                      username=("text", "PRIMARY_KEY"),
+                                      id=("integer", "PRIMARY KEY"),
+                                      username=("text", "NOT NULL"),
                                       first_name=("text", "NOT NULL"),
                                       surname=("text", "NOT NULL"),
                                       password=("text", "NOT NULL"),
                                       priority=("integer", "NOT NULL"))
-            database.add_record(*data, table_name=settings.users_table)
+
+            database.add_record(["username", "first_name", "surname", "password", "priority"], data, table_name=settings.users_table)
             logging.info("New user registered")
         self.ui.Register.setDisabled(True)
 
@@ -110,7 +124,6 @@ class Register(QWidget):
             if not settings.first_run:
                 query = f"SELECT username FROM {settings.users_table}"
                 users = database.get_record(query)
-                print(users[0])
                 if username in users[0]:
                     return None, "Your username is taken\n"
             return username, ""

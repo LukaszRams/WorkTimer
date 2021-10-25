@@ -4,6 +4,7 @@ from applications.frames.ui_menu import Ui_Menu
 from applications.frames.ui_logout_prompt import Ui_LogoutPrompt
 from PyQt5.QtWidgets import QWidget, QDialog, QHBoxLayout, QPushButton
 from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QCloseEvent
 from applications.settings import settings
 import logging
 
@@ -16,6 +17,15 @@ class Menu(QWidget):
         self.ui.logout_btn.clicked.connect(self.slot_logout)
         self.ui.back_btn.clicked.connect(self.slot_back)
         self.show_categories()
+
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        """
+        Logout and close the app
+        :return:
+        """
+        settings.initialize_client_settings()
+        import sys
+        sys.exit()
 
     def slot_logout(self):
         """
@@ -66,14 +76,14 @@ class Menu(QWidget):
         if settings.user_installed_plugins:
             btn = self.add_btn("Added options")
             btn.clicked.connect(self.slot_added_user)
+        if settings.user["priority"] == "admin":
+            if settings.admin_builtin_plugins:
+                btn = self.add_btn("Basic admin options")
+                btn.clicked.connect(self.slot_basic_admin)
 
-        if settings.admin_builtin_plugins:
-            btn = self.add_btn("Basic admin options")
-            btn.clicked.connect(self.slot_basic_admin)
-
-        if settings.admin_installed_plugins:
-            btn = self.add_btn("Added admin options")
-            btn.clicked.connect(self.slot_added_admin)
+            if settings.admin_installed_plugins:
+                btn = self.add_btn("Added admin options")
+                btn.clicked.connect(self.slot_added_admin)
 
     def clear(self):
         """
@@ -159,7 +169,8 @@ class Menu(QWidget):
         for plugin in plugins_list:
             btn = self.add_btn(plugin.Plugin.DISPLAY_NAME)
             btn.setToolTip(plugin.Plugin.DESCRIPTION)
-            btn.clicked.connect(lambda: self.plugin_selected(plugin))
+            btn.clicked.connect(lambda ch, plugin=plugin: self.plugin_selected(plugin))
+
 
     def plugin_selected(self, plugin):
         """
@@ -168,7 +179,7 @@ class Menu(QWidget):
         :return:
         """
         self.active_plugin = plugin.Plugin(parent=self)
-        self.active_plugin.setWhatsThis(plugin.Plugin.INSTRUCTION)
+        self.active_plugin.setWhatsThis(self.active_plugin.INSTRUCTION)
         self.hide()
+        logging.debug("Plugin %s has been activated" % self.active_plugin.DISPLAY_NAME)
         self.active_plugin.exec_()
-        logging.debug("Plugin %s has been activated" % plugin.Plugin.DISPLAY_NAME)

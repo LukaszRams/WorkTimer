@@ -4,6 +4,7 @@ from .database.connect import database
 from .settings import settings
 from .frames.ui_welcome import Ui_WelcomeFrame
 from PyQt5.QtWidgets import QMainWindow, QDialog
+from PyQt5 import QtGui
 import logging
 
 
@@ -28,6 +29,15 @@ class Welcome(QMainWindow):
             self.ui.login_btn.setVisible(False)
         self.ui.login_btn.clicked.connect(self.slot_login)
         self.ui.signup_btn.clicked.connect(self.slot_sign_up)
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        """
+        Closing the app
+        :param a0: event
+        :return:
+        """
+        import sys
+        sys.exit()
 
     def slot_login(self):
         """

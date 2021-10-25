@@ -36,8 +36,7 @@ class Database:
         :param kwargs: column names and Tuple(type, other flags)
         :return: None
         """
-        sql_string = f"""CREATE TABLE IF NOT EXISTS {table_name} 
-                    ({", ".join([f'{key} {" ".join([elem for elem in val])}' for key, val in kwargs.items()])})"""
+        sql_string = f"""CREATE TABLE IF NOT EXISTS {table_name} ({", ".join([f'{key} {" ".join([elem for elem in val])}' for key, val in kwargs.items()])})"""
         logging.debug("Creating %s table" % table_name)
         try:
             self.cursor.execute(sql_string)
@@ -48,16 +47,17 @@ class Database:
             import traceback
             logging.error(traceback.format_exc())
 
-    def add_record(self, *args, table_name) -> None:
+    def add_record(self, columns, data, table_name) -> None:
         """
         Adds a record to the table and returns an error in case of failure
-        :param args: values to be set for specific columns, missing values are marked as "", it is important
+        :param columns: names of columns to which values are to be assigned
+        :param data: values to be set for specific columns, it is important
                      that the order of values corresponds to the order of columns
         :param table_name: Name of the table
         :return: None
         """
         try:
-            self.cursor.execute(f"""INSERT INTO {table_name} VALUES ({", ".join(["?" for _ in args])})""", args)
+            self.cursor.execute(f"""INSERT INTO {table_name} ({",".join([column for column in columns])}) VALUES ({", ".join(["?" for _ in data])})""", data)
             self.connection.commit()
             logging.info("Record added to table \'%s\'" % table_name)
             return True
@@ -72,6 +72,15 @@ class Database:
         :return: result of the query
         """
         return self.cursor.execute(sql_query).fetchall()
+
+    def update(self, query):
+        """
+        Updates the database according to the request
+        :param query:
+        :return:
+        """
+        self.cursor.execute(query)
+        self.connection.commit()
 
 
 database = Database()
