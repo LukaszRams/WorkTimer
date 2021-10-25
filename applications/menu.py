@@ -23,8 +23,10 @@ class Menu(QWidget):
         Logout and close the app
         :return:
         """
+        logging.debug("Log out client")
         settings.initialize_client_settings()
         import sys
+        logging.info("Close app")
         sys.exit()
 
     def slot_logout(self):
