@@ -69,6 +69,12 @@ class Plugin(QDialog):
                                             max-height: 30""")
         else:
             status = "The user with the specified name does not exist"
+        self.label.setStyleSheet("""color: black;
+                                    font: 12pt \"Segoe Print\"; 
+                                    min-width: 100; 
+                                    max-width: 400; 
+                                    min-height: 30; 
+                                    max-height: 30""")
         self.label.setText(status)
 
     def check_password(self):
