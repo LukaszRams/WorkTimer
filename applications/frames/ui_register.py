@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 lineedit_style = """QLineEdit{
                         border: 1px solid gray;
                         border-radius: 13px;
@@ -22,6 +23,11 @@ lineedit_style = """QLineEdit{
                     }
                     QLineEdit:focus{
                         border: 1px solid blue;
+                    }
+                    QToolTip { background-color: qlineargradient(x1: 0.5, y1: 0.5, x2: 1, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+                        color: black; 
+                        border: 1px solid gray;
+                        border-radius: 4px;
                     }"""
 
 btn_style = """QPushButton {

@@ -63,23 +63,35 @@ class Plugin(QDialog):
                 if columns:
                     self.update_user(columns, data)
                     status = "User has been updated"
-                    self.label.setText(status)
-                    self.label.setStyleSheet("""color: green;
-                                                font: 14pt \"Segoe Print\"; 
-                                                min-width: 100; 
-                                                max-width: 400; 
-                                                min-height: 30; 
-                                                max-height: 30""")
+                    self.show_status(status, "Positive")
                 else:
                     status = "You must enter the data for the update"
+                    self.show_status(status, "Negative")
         else:
             status = "The user with the specified name does not exist"
-        self.label.setStyleSheet("""color: black;
-                                                font: 12pt \"Segoe Print\"; 
-                                                min-width: 100; 
-                                                max-width: 400; 
-                                                min-height: 30; 
-                                                max-height: 30""")
+            self.show_status(status, "Negative")
+
+    def show_status(self, status, type):
+        """
+        Show status in label
+        :param status:
+        :param type:
+        :return:
+        """
+        if type == "Positive":
+            self.label.setStyleSheet("""color: green;
+                                        font: 14pt \"Segoe Print\"; 
+                                        min-width: 100; 
+                                        max-width: 400; 
+                                        min-height: 30; 
+                                        max-height: 30""")
+        else:
+            self.label.setStyleSheet("""color: black;
+                                        font: 12pt \"Segoe Print\"; 
+                                        min-width: 100; 
+                                        max-width: 400; 
+                                        min-height: 30; 
+                                        max-height: 30""")
         self.label.setText(status)
 
     def get_data(self):

@@ -62,11 +62,12 @@ class Login(QDialog):
         """
         data = self.check_user()
         if data:
-            if self.ui.l_password.text() == data[4]:
-                settings.update_user_setting(["username", "first_name", "surname", "priority"], [*data[1:4], data[5]])
+            if self.ui.l_password.text() == data[3]:
+                settings.update_user_setting(["username", "first_name", "surname", "priority"], [*data[0:3], data[4]])
                 settings.load_plugins(settings.user["priority"])
                 self.accept()
                 logging.info("The user has been logged in")
+                database.create_other_databases()
             else:
                 logging.debug("Incorrect password")
                 LoginError = QDialog()

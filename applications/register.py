@@ -60,6 +60,10 @@ class Register(QWidget):
         :return:
         """
         logging.info("Back button clicked")
+        if self.parent.first_run():
+            self.parent.ui.login_btn.setVisible(False)
+        else:
+            self.parent.ui.login_btn.setVisible(True)
         self.parent.show()
         self.hide()
 
@@ -79,14 +83,14 @@ class Register(QWidget):
             self.ui.show_info.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             if settings.first_run:
                 database.create_table(table_name=settings.users_table,
-                                      id=("integer", "PRIMARY KEY"),
-                                      username=("text", "NOT NULL"),
-                                      first_name=("text", "NOT NULL"),
-                                      surname=("text", "NOT NULL"),
-                                      password=("text", "NOT NULL"),
-                                      priority=("integer", "NOT NULL"))
+                                      data={"username": ("text", "PRIMARY KEY", "NOT NULL"),
+                                            "first_name": ("text", "NOT NULL"),
+                                            "surname": ("text", "NOT NULL"),
+                                            "password": ("text", "NOT NULL"),
+                                            "priority": ("integer", "NOT NULL")})
 
-            database.add_record(["username", "first_name", "surname", "password", "priority"], data, table_name=settings.users_table)
+            database.add_record(["username", "first_name", "surname", "password", "priority"], data,
+                                table_name=settings.users_table)
             logging.info("New user registered")
         self.ui.Register.setDisabled(True)
 
@@ -129,7 +133,6 @@ class Register(QWidget):
             return username, ""
         else:
             return None, "Username is incorrect, check the tip in the input field\n"
-
 
     def check_first_name(self, first_name):
         """
@@ -196,6 +199,3 @@ class Register(QWidget):
         elif not re.findall(r"[!@#$%^&*?]+", pwd):
             return None, "Password should contain special character"
         return pwd, ""
-
-
-

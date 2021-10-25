@@ -24,7 +24,7 @@ class Database:
         self.connection.close()
         logging.debug("Connection to database end")
 
-    def create_table(self, table_name, **kwargs) -> None:
+    def create_table(self, table_name, data) -> None:
         """
         Creates a table in the database (if the table with the specified name does not exist).
         Primary key must be add to kwargs
@@ -33,10 +33,10 @@ class Database:
                             surname=("text", "NOT NULL"), password=("text", "NOT NULL"), priority=("integer", "NOT NULL"),
                             position=("text",), comments=("text",))
         :param table_name: name of the table to be created
-        :param kwargs: column names and Tuple(type, other flags)
+        :param data: dict with column names and Tuple(type, other flags)
         :return: None
         """
-        sql_string = f"""CREATE TABLE IF NOT EXISTS {table_name} ({", ".join([f'{key} {" ".join([elem for elem in val])}' for key, val in kwargs.items()])})"""
+        sql_string = f"""CREATE TABLE IF NOT EXISTS {table_name} ({", ".join([f'{key} {" ".join([elem for elem in val])}' for key, val in data.items()])})"""
         logging.debug("Creating %s table" % table_name)
         try:
             self.cursor.execute(sql_string)
@@ -81,6 +81,15 @@ class Database:
         """
         self.cursor.execute(query)
         self.connection.commit()
+
+    def create_other_databases(self):
+        """
+        After registering the first user, it creates tables in the database
+        :return:
+        """
+        from applications.database.tables import tables
+        for table in tables:
+            self.create_table(table.table_name, table.data)
 
 
 database = Database()

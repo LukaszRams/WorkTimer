@@ -82,5 +82,6 @@ class Welcome(QMainWindow):
         # check if table has records
         return len(database.get_record(f"SELECT * FROM {settings.users_table}")) == 0
 
+
 welcome = Welcome()
 
