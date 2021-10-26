@@ -83,13 +83,13 @@ class Register(QWidget):
             self.ui.show_info.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             if settings.first_run:
                 database.create_table(table_name=settings.users_table,
-                                      data={"username": ("text", "PRIMARY KEY", "NOT NULL"),
+                                      data={"user": ("text", "PRIMARY KEY", "NOT NULL"),
                                             "first_name": ("text", "NOT NULL"),
                                             "surname": ("text", "NOT NULL"),
                                             "password": ("text", "NOT NULL"),
                                             "priority": ("integer", "NOT NULL")})
 
-            database.add_record(["username", "first_name", "surname", "password", "priority"], data,
+            database.add_record(["user", "first_name", "surname", "password", "priority"], data,
                                 table_name=settings.users_table)
             logging.info("New user registered")
         self.ui.Register.setDisabled(True)
@@ -126,7 +126,7 @@ class Register(QWidget):
         match = re.findall(r"^[a-zA-Z]+\w+$", username)
         if match and username == match[0] and len(username) >= 4:
             if not settings.first_run:
-                query = f"SELECT username FROM {settings.users_table}"
+                query = f"SELECT user FROM {settings.users_table}"
                 users = database.get_record(query)
                 if username in users[0]:
                     return None, "Your username is taken\n"

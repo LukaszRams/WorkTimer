@@ -30,74 +30,57 @@ btn_style = """QPushButton {
                 }"""
 
 
-class Ui_LogoutPrompt:
-    def setupUi(self, LogoutPrompt):
-        LogoutPrompt.setObjectName("LogoutPrompt")
-        LogoutPrompt.resize(500, 200)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(LogoutPrompt.sizePolicy().hasHeightForWidth())
-        LogoutPrompt.setSizePolicy(sizePolicy)
-        self.gridLayout = QtWidgets.QGridLayout(LogoutPrompt)
-        self.gridLayout.setObjectName("gridLayout")
+class Ui_AskDialog:
+    def setupUi(self, AskDialog, title, description):
+        AskDialog.setObjectName("WorkTimer")
+        AskDialog.setFixedSize(500, 200)
+        self.gridLayout = QtWidgets.QGridLayout(AskDialog)
         self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.label_2 = QtWidgets.QLabel(LogoutPrompt)
-        font = QtGui.QFont()
-        font.setFamily("Segoe Print")
-        font.setPointSize(16)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_2.setFont(font)
+
+        # main_info
+        self.label_2 = QtWidgets.QLabel()
+        self.label_2.setStyleSheet("color: black; font: bold 16pt \"Segoe Print\"")
         self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_2.setObjectName("label_2")
+        self.label_2.setText(title)
         self.verticalLayout.addWidget(self.label_2)
-        self.label = QtWidgets.QLabel(LogoutPrompt)
-        font = QtGui.QFont()
-        font.setFamily("Segoe Print")
-        font.setPointSize(12)
-        self.label.setFont(font)
+
+
+        # description
+        self.label = QtWidgets.QLabel()
+        self.label.setStyleSheet("color: black; font: 12pt \"Segoe Print\"")
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label.setObjectName("label")
+        self.label.setText(description)
         self.verticalLayout.addWidget(self.label)
+
         self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.btn_cancel = QtWidgets.QPushButton(LogoutPrompt)
+
+        self.btn_cancel = QtWidgets.QPushButton(AskDialog)
         self.btn_cancel.setMinimumSize(QtCore.QSize(100, 26))
         self.btn_cancel.setMaximumSize(QtCore.QSize(100, 26))
         self.btn_cancel.setStyleSheet(btn_style)
-        self.btn_cancel.setObjectName("btn_cancel")
+        self.btn_cancel.setText("Cencel")
         self.horizontalLayout.addWidget(self.btn_cancel)
-        self.btn_Ok = QtWidgets.QPushButton(LogoutPrompt)
+
+        self.btn_Ok = QtWidgets.QPushButton(AskDialog)
         self.btn_Ok.setMinimumSize(QtCore.QSize(100, 26))
         self.btn_Ok.setMaximumSize(QtCore.QSize(100, 26))
         self.btn_Ok.setStyleSheet(btn_style)
-        self.btn_Ok.setObjectName("btn_Ok")
+        self.btn_Ok.setText("Ok")
         self.horizontalLayout.addWidget(self.btn_Ok)
+
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
-        self.retranslateUi(LogoutPrompt)
-        QtCore.QMetaObject.connectSlotsByName(LogoutPrompt)
-
-    def retranslateUi(self, LogoutPrompt):
-        _translate = QtCore.QCoreApplication.translate
-        LogoutPrompt.setWindowTitle(_translate("LogoutPrompt", "WorkTimer"))
-        self.label_2.setText(_translate("LogoutPrompt", "Do you want to log out?"))
-        self.label.setText(_translate("LogoutPrompt", "If you log out, all unsaved data is deleted and you \n"
-                                                        "are taken back to the start screen"))
-        self.btn_cancel.setText(_translate("LogoutPrompt", "Cancel"))
-        self.btn_Ok.setText(_translate("LogoutPrompt", "Ok"))
+        QtCore.QMetaObject.connectSlotsByName(AskDialog)
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    LogoutPrompt = QtWidgets.QDialog()
-    ui = Ui_LogoutPrompt()
-    ui.setupUi(LogoutPrompt)
-    LogoutPrompt.show()
+    AskDialog = QtWidgets.QDialog()
+    ui = Ui_AskDialog()
+    ui.setupUi(AskDialog, "ERROR", "DESSCRIPTION")
+    AskDialog.show()
     sys.exit(app.exec_())

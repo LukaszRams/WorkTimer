@@ -176,9 +176,9 @@ class Ui_AutoGui:
         """
         # LAYOUT
         layout = QtWidgets.QHBoxLayout()
-        label = QtWidgets.QLabel()
 
         # LABEL
+        label = QtWidgets.QLabel()
         label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         label.setStyleSheet("color: black; font: 12pt \"Segoe Print\"; max-width: 600; max-height: 300")
         label.setText("")

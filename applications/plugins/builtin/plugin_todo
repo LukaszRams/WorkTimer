@@ -1,0 +1,12 @@
+
+admin:
+    - delete_user
+    - check_declared_holidays (for user and all)
+    - check working hours (for user and all)
+user:
+    - users_list
+    - delete_user (with logout)
+    - report_your_presence
+    - declare_the_end_of_work
+    - report_a_holiday
+

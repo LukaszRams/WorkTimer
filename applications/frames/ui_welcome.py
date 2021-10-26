@@ -105,6 +105,7 @@ class Ui_WelcomeFrame:
         WelcomeFrame.setStatusBar(self.statusbar)
 
         self.retranslateUi(WelcomeFrame)
+        QtCore.QMetaObject.connectSlotsByName(WelcomeFrame)
 
     def retranslateUi(self, WelcomeFrame):
         _translate = QtCore.QCoreApplication.translate

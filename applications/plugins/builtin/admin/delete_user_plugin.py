@@ -8,7 +8,6 @@ from PyQt5.QtGui import QCloseEvent, QKeyEvent
 from PyQt5.QtCore import Qt
 from applications.settings import settings
 from .ask_dialog import Ui_AskDialog
-import re
 
 
 class Plugin(QDialog):
@@ -63,7 +62,7 @@ class Plugin(QDialog):
         elif not self.username.text():
             status = ("You must enter a username", "Negative")
         elif self.check_user():
-            logging.debug("Ask for logout")
+            logging.debug("Ask delete user")
             Ask = QDialog()
             ui = Ui_AskDialog()
             ui.setupUi(Ask, "User deletion", f"Are you sure you want to delete the user \"{self.username.text()}\"")

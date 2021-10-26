@@ -3,8 +3,9 @@
 from .ui_auto_gui import Ui_AutoGui
 import logging
 from applications.database.connect import database
-from PyQt5.QtWidgets import QDialog, QSpacerItem, QSizePolicy
-from PyQt5.QtGui import QCloseEvent, QIntValidator
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtGui import QCloseEvent, QIntValidator, QKeyEvent
+from PyQt5.QtCore import Qt
 import datetime
 
 
@@ -89,5 +90,11 @@ class Plugin(QDialog):
             self.label.setStyleSheet("""color: black;
                                         font: 12pt \"Segoe Print\"; """)
         self.label.setText(status)
+
+    def keyPressEvent(self, a0: QKeyEvent) -> None:
+        if a0.key() == Qt.Key.Key_Return:
+            return
+        QDialog.keyPressEvent(self, a0)
+
 
 

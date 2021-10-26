@@ -85,13 +85,12 @@ class Login(QDialog):
             ui.label.setText("Verify correctness of user name")
             LoginError.exec_()
 
-
     def check_user(self):
         """
         Checks if the user exists and returns his data
         :return:
         """
         user = self.ui.l_login.text()
-        query = f'SELECT * from {settings.users_table} where username == \"{user}\"'
+        query = f'SELECT * from {settings.users_table} where user == \"{user}\"'
         data = database.get_record(query)
         return data[0] if data else None

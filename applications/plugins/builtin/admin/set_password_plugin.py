@@ -4,7 +4,8 @@ from .ui_auto_gui import Ui_AutoGui
 import logging
 from applications.database.connect import database
 from PyQt5.QtWidgets import QDialog, QLineEdit
-from PyQt5.QtGui import QCloseEvent
+from PyQt5.QtGui import QCloseEvent, QKeyEvent
+from PyQt5.QtCore import Qt
 from applications.settings import settings
 import re
 
@@ -103,11 +104,16 @@ class Plugin(QDialog):
         Checks whether a particular user exists
         :return:
         """
-        return len(database.get_record(f'''SELECT * FROM {settings.users_table} WHERE username == "{self.username.text()}"'''))
+        return len(database.get_record(f'''SELECT * FROM {settings.users_table} WHERE user = "{self.username.text()}"'''))
 
     def update_password(self):
         """
         Sets a password for the user
         :return:
         """
-        database.update(f"""UPDATE {settings.users_table} SET password==\"{self.new_password.text()}\" WHERE username==\"{self.username.text()}\"""")
+        database.update(f"""UPDATE {settings.users_table} SET password==\"{self.new_password.text()}\" WHERE user = \"{self.username.text()}\"""")
+
+    def keyPressEvent(self, a0: QKeyEvent) -> None:
+        if a0.key() == Qt.Key.Key_Return:
+            return
+        QDialog.keyPressEvent(self, a0)

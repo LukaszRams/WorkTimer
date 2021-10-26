@@ -4,7 +4,8 @@ from .ui_auto_gui import Ui_AutoGui
 import logging
 from applications.database.connect import database
 from PyQt5.QtWidgets import QDialog
-from PyQt5.QtGui import QCloseEvent
+from PyQt5.QtGui import QCloseEvent, QKeyEvent
+from PyQt5.QtCore import Qt
 from applications.settings import settings
 import re
 
@@ -120,7 +121,7 @@ class Plugin(QDialog):
         Checks whether a particular user exists
         :return:
         """
-        return len(database.get_record(f'''SELECT * FROM {settings.users_table} WHERE username == "{self.username.text()}"'''))
+        return len(database.get_record(f'''SELECT * FROM {settings.users_table} WHERE user = "{self.username.text()}"'''))
 
     def update_user(self, cols, vals):
         """
@@ -129,7 +130,7 @@ class Plugin(QDialog):
         :param vals: values for columns
         :return:
         """
-        database.update(f"""UPDATE {settings.users_table} SET {" = '%s', ".join([col for col in cols])}= \'%s\' WHERE username == \'{self.username.text()}\'""" % tuple(vals))
+        database.update(f"""UPDATE {settings.users_table} SET {" = '%s', ".join([col for col in cols])}= \'%s\' WHERE user = \'{self.username.text()}\'""" % tuple(vals))
 
     def check_first_name(self, first_name):
         """
@@ -170,3 +171,8 @@ class Plugin(QDialog):
             elif len(elem) < 2:
                 return f"\"{elem}\" is too short\n"
         return None
+
+    def keyPressEvent(self, a0: QKeyEvent) -> None:
+        if a0.key() == Qt.Key.Key_Return:
+            return
+        QDialog.keyPressEvent(self, a0)

@@ -23,12 +23,15 @@ class Welcome(QMainWindow):
         super().__init__()
         self.ui = Ui_WelcomeFrame()
         self.ui.setupUi(self)
+        self.ui.login_btn.clicked.connect(self.slot_login)
+        self.ui.signup_btn.clicked.connect(self.slot_sign_up)
+
+    def show(self) -> None:
         if self.first_run():  # if we have no user
             logging.debug("First run")
             settings.first_run = True
             self.ui.login_btn.setVisible(False)
-        self.ui.login_btn.clicked.connect(self.slot_login)
-        self.ui.signup_btn.clicked.connect(self.slot_sign_up)
+        QMainWindow.show(self)
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         """
@@ -79,8 +82,8 @@ class Welcome(QMainWindow):
         table = database.cursor.execute(query).fetchall()
         if len(table) == 0:
             return True
-        # check if table has records
-        return len(database.get_record(f"SELECT * FROM {settings.users_table}")) == 0
+        # check if table has admin
+        return len(database.get_record(f"SELECT * FROM {settings.users_table} WHERE priority = 'admin'")) == 0
 
 
 welcome = Welcome()
